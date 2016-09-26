@@ -1,0 +1,46 @@
+syntax on
+
+set expandtab
+set tabstop=4
+set shiftwidth=4
+set smartindent
+
+set number
+
+set incsearch
+set ignorecase
+set smartcase
+
+set showcmd
+set whichwrap=b,s,<,>
+
+set ttimeoutlen=50
+
+if !isdirectory($HOME.'/.vim')
+    call mkdir($HOME.'/.vim')
+endif
+
+if has('persistent_undo')
+    if !isdirectory($HOME.'/.vim/undodir')
+        call mkdir($HOME.'/.vim/undodir')
+    endif
+    set undodir=~/.vim/undodir
+    set undofile
+    set undolevels=1000
+    set undoreload=10000
+endif
+
+if has('clipboard')
+    set clipboard=unnamedplus
+endif
+
+if &history < 10000
+    set history=10000
+endif
+
+cnoreabbrev help tab help
+
+cnoreabbrev w!! w !sudo tee %
+
+command! Vr source ~/.vimrc
+command! Ve tabedit + ~/.vim/vim-sane
